@@ -23,19 +23,19 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
     * Twitter(X)、Bluesky、Tokimekiのタイムライン上にある画像やGIF、動画から代替テキスト（ALT）を自動で見つけ出し、専用のコピーボタンを生成します  
       Automatically finds ALT text from images, GIFs, and videos on Twitter(X), Bluesky, and Tokimeki.  
 
-2. **マウスホバーでのスマート表示**  
+2. **マウスホバーでのスマート表示 / Smart Hover View**  
     * 通常時は画像の邪魔をしないよう隠れており、マウスを乗せた時だけボタンが表示されます  
       Buttons appear only on hover. Tooltips show the ALT text when hovering over the button.  
     * ボタンにマウスを合わせると、代替テキストの内容がツールチップで表示されます  
       Hovering over the button triggers a tooltip that displays the alternative text.  
 
-3. **ワンクリック・コピー機能**  
+3. **ワンクリック・コピー機能 / Instant One-Click Copy**  
     * クリックするだけでALTをクリップボードにコピーできます  
       AIイラストのプロンプト収集や、メモ作成に最適です  
       Instantly copy ALT text to the clipboard with a single click.  
       Ideal for AI prompt collection.  
 
-4. **テキストの自動クリーンアップ（お掃除機能）**  
+4. **テキストの自動クリーンアップ（お掃除機能） / Text Polishing**  
     * 「Alt: 」などの不要な接頭辞や、特定の定型文（プロンプトのヘッダーなど）を自動で削除して、純粋な説明文だけを表示します  
       Automatically removes unnecessary prefixes like "Alt: " to extract clean descriptions.  
 
