@@ -41,7 +41,7 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
 
 ## ✨ 世界唯一＆最強の特徴 / World-First & Unique Features  
 
-<img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/screenshot.png" style="height: 200px; width: 200px; object-fit: contain;" align="right" alt="screenshot" />  
+<img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/screenshot.png" style="width: 200px; object-fit: contain;" align="right" alt="screenshot" />  
 
 * **【世界唯一】Bluesky動画のALT対応 / World-First: Bsky Video ALT Support:**  
   Blueskyの公式アプリやブラウザ版では、動画に設定されたALTを確認する術がありません  
