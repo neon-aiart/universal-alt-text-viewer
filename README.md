@@ -11,7 +11,7 @@ In today's social media, accessibility (ALT: alternative text) is a vital bridge
 Twitter, Bluesky, Tokimekiの画像やGIF、動画に設定されたALTを、マウスホバーだけで瞬時に表示し、ワンクリックでコピーするUserScriptです  
 This UserScript instantly displays ALT text for images, GIFs, and videos on Twitter, Bluesky, and Tokimeki with just a hover, and allows for one-click copying.  
 
-➡️ [**いますぐインストール！**](#-インストール方法-installation-guide) (Skip to Installation)  
+➡️ [**いますぐインストール！**](#-インストール方法--installation-guide) (Skip to Installation)  
 
 ⭐ スターをポチッとお願いします✨ (Please hit the [Star] button!)<br clear="right">  
 
@@ -124,7 +124,7 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 
 ---
 
-## 📝 更新履歴
+## 📝 更新履歴  
 
 ### v3.0 (Current Release)  
 * ✅ 正式公開  
