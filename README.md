@@ -83,7 +83,7 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
    * **ScriptCat**: [https://scriptcat.org/](https://scriptcat.org/)  
 
 * **スクリプトをインストール / Install the script:**  
-   * [Greasy Fork](https://greasyfork.org/ja/scripts/557385) にアクセスし、「インストール」ボタンを押してください  
+   * [Greasy Fork](https://greasyfork.org/ja/scripts/563656) にアクセスし、「インストール」ボタンを押してください  
      Access and click the "Install" button.  
 
 ---
@@ -124,7 +124,7 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 
 ---
 
-## 📝 更新履歴  
+## 📝 更新履歴
 
 ### v3.0 (Current Release)  
 * ✅ 正式公開  
