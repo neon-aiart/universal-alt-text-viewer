@@ -132,9 +132,6 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 
 ## 📝 更新履歴  
 
-### v3.1 (Next Update)  
-* ☑️ 最低文字数 (1～99) を追加  
-
 ### v3.0 (Current Release)  
 * ✅ 正式公開  
 
