@@ -1,4 +1,4 @@
-# 📝 Universal ALT Text Viewer v3.0  
+# 📝 Universal ALT Text Viewer v3.1  
 
 <img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/00498-3039747079.png" style="height: 200px; width: 200px; object-fit: contain;" align="right" alt="thumbnail" />  
 
@@ -132,8 +132,14 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 
 ## 📝 更新履歴  
 
-### v3.0 (Current Release)  
-* ✅ 正式公開  
+### v3.1 (Current Release)  
+☑️ 最低文字数 (1～99) を追加  
+☑️ depth を 0 から 1 に変更  
+☑️ マウスオーバーでボタンの影が消えるバグを修正  
+☑️ 引用元ALT付GIFのポストにボタンがつかなかったバグを修正  
+
+### v3.0  
+✅ 正式公開  
 
 ---
 
