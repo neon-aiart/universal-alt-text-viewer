@@ -38,7 +38,7 @@
 
     const SCRIPT_VERSION = '3.1';
 
-    const MINIMUM_CHARACTER_LENGTH = 12; // 最低文字数（未使用）
+    const MINIMUM_CHARACTER_LENGTH = 12; // 最低文字数
 
     // 除外ALTテキスト
     const localizedImageStrings = [
