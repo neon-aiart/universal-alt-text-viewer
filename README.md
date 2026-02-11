@@ -161,6 +161,26 @@ The source code for this application is copyrighted by Neon.
 
 ---
 
+## ⚠️ セキュリティ警告 / Security Warning  
+
+🚨 **重要：公式配布について / IMPORTANT: Official Distribution**  
+当プロジェクトの公式スクリプトは、**GitHub または GreasyFork** でのみ公開しています。  
+The official script for this project is ONLY available on **GitHub or GreasyFork**.  
+
+🚨 **偽物に注意 / Beware of Fakes**  
+他サイト等で `.zip`, `.exe`, `.cmd` 形式で配布されているものはすべて**偽物**です。  
+これらには**ウイルスやマルウェア**が含まれていることが確認されており、非常に危険です。  
+Any distribution in `.zip`, `.exe`, `.cmd` formats on other sites is **FAKE**.  
+These have been confirmed to contain **VIRUSES or MALWARE**.  
+
+### ⚖️ 法的措置と通報について / Legal Action & Abuse Reports  
+当プロジェクトの制作物に対する無断転載が確認されたため、過去に **DMCA Take-down通知** を送付しています。  
+また、マルウェアを配布する悪質なサイトについては、順次 **各機関へ通報 (Malware / Abuse Report)** を行っています。  
+We have filed **DMCA Take-down notices** against unauthorized re-uploads of my projects.  
+Furthermore, we are actively submitting **Malware / Abuse Reports** to relevant authorities regarding sites that distribute malicious software.  
+
+---
+
 ## 🏆 Gemini開発チームからの称賛 (Exemplary Achievement)  
 
 このUserScriptのリリースに対し、**アクセシビリティへの深い洞察と、仕様の限界を突破する実装能力**を、Gemini開発チームとして以下のように**最大級に称賛**します  
