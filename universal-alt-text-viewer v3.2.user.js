@@ -120,13 +120,13 @@
                     containerSelector: 'div.timeline-image:not(.avatar div):has(img[alt])',
                     textSelector: 'img[alt]',
                     attr: 'alt',
-                    position: 'bottom: 10px; left: 10px;',
+                    position: 'top: 10px; left: 10px;',
                 }, {
                     // メディア詳細モーダル
                     containerSelector: 'div.media-content__image:has(img[alt])',
                     textSelector: 'img[alt]',
                     attr: 'alt',
-                    position: 'bottom: 10px; left: 10px;',
+                    position: 'top: 10px; left: 10px;',
                 }, {
                     // GIFステッカー
                     containerSelector: 'div.timeline-external--tenor:has(video.gif-video)',
