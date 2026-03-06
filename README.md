@@ -1,4 +1,4 @@
-# 📝 Universal ALT Text Viewer v3.1  
+# 📝 Universal ALT Text Viewer v3.2  
 
 <img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/00498-3039747079.png" style="height: 200px; width: 200px; object-fit: contain;" align="right" alt="thumbnail" />  
 
@@ -54,37 +54,37 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
 
 * **ハイブリッド座標計算システム / Hybrid Positioning System:**  
   通常表示と拡大表示（モーダル）で基準座標を動的に切り替え、どんな状況でもツールチップが隠れません  
-  Dynamically switches coordinate bases between timeline and modal views to ensure visibility.
+  Dynamically switches coordinate bases between timeline and modal views to ensure visibility.  
 
 * **はみ出し防止 / Anti-Overflow Design:**  
   `clamp()` 関数により、ボタンが画像の外に配置されるのを物理的に防ぎます  
-  The `clamp()` function ensures the button stays strictly within the image frame, preventing any layout breakage.
+  The `clamp()` function ensures the button stays strictly within the image frame, preventing any layout breakage.  
 
 * **🌐 ゼロコンフィグのマルチプラットフォーム対応 / Zero-Config Multi-AI Support:**  
-    * Twitter / X (画像・ステッカー)  
-    * Bluesky / Tokimeki (画像・ステッカー・動画・GIF)  
+  * Twitter / X (画像・ステッカー)  
+  * Bluesky / Tokimeki (画像・ステッカー・動画・GIF)  
 
 * **プラットフォーム拡張性 (`platformConfigs`) / Platform Extensibility (`platformConfigs`):**  
   DOM構造から `root`（ポスト単位）と `targets`（コンテナと属性）を定義する設計のため、HTMLの知識があれば新しいプラットフォームへの対応も容易です  
   Designed to define `root` (per post) and `targets` (containers and attributes) based on DOM structure, making it easy to support new platforms with basic HTML knowledge.  
 
 * **賢いフィルタリング / Smart Filtering:**  
-    * **12文字以下のテキストは無視:** 短すぎるテキストやシステム用の文字列を弾き、意味のある説明文だけを対象にします  
-      **Ignore text under 12 characters:** Filters out strings that are too short or system-generated, targeting only meaningful descriptions.  
-    * **極小要素の除外**: アイコンなどの小さな要素を誤検知しないよう、要素の幅 `offsetWidth` による判定を行っています  
-      **Exclude tiny elements:** Uses `offsetWidth` detection to prevent false positives on small elements like icons.  
+  * **12文字以下のテキストは無視:** 短すぎるテキストやシステム用の文字列を弾き、意味のある説明文だけを対象にします  
+    **Ignore text under 12 characters:** Filters out strings that are too short or system-generated, targeting only meaningful descriptions.  
+  * **極小要素の除外**: アイコンなどの小さな要素を誤検知しないよう、要素の幅 `offsetWidth` による判定を行っています  
+    **Exclude tiny elements:** Uses `offsetWidth` detection to prevent false positives on small elements like icons.  
 
 ---
 
 ### ✨ インストール方法 / Installation Guide  
 
 * **UserScriptマネージャーをインストール / Install the UserScript manager:**  
-   * **Tampermonkey**: [https://www.tampermonkey.net/](https://www.tampermonkey.net/)  
-   * **ScriptCat**: [https://scriptcat.org/](https://scriptcat.org/)  
+  * **Tampermonkey**: [https://www.tampermonkey.net/](https://www.tampermonkey.net/)  
+  * **ScriptCat**: [https://scriptcat.org/](https://scriptcat.org/)  
 
 * **スクリプトをインストール / Install the script:**  
-   * [Greasy Fork](https://greasyfork.org/ja/scripts/563656) にアクセスし、「インストール」ボタンを押してください  
-     Access and click the "Install" button.  
+  * [Greasy Fork](https://greasyfork.org/ja/scripts/563656) にアクセスし、「インストール」ボタンを押してください  
+    Access and click the "Install" button.  
 
 ---
 
@@ -102,12 +102,12 @@ You can customize the following global variables in the source code:
 * `platformConfigs`:  
   新しいプラットフォームへの対応や、DOM変更時のセレクタ修正ができます  
   Define new platform support or update selectors when DOM structures change.  
-   * `targets` - { `position` }:  
-     ボタンの表示位置を `top`, `bottom`, `left`, `right` の組み合わせで自由に調整できます  
-     Adjust the button position using combinations of `top`, `bottom`, `left`, and `right`.  
-     **⋈ 設定例 / Example ⋈**  
-     > **左上 (Top-Left):** `position: 'top: 10px; left: 10px;'`  
-     > **右下 (Bottom-Right):** `position: 'bottom: 10px; right: 10px;'`  
+  * `targets` - { `position` }:  
+    ボタンの表示位置を `top`, `bottom`, `left`, `right` の組み合わせで自由に調整できます  
+    Adjust the button position using combinations of `top`, `bottom`, `left`, and `right`.  
+    **⋈ 設定例 / Example ⋈**  
+    > **左上 (Top-Left):** `position: 'top: 10px; left: 10px;'`  
+    > **右下 (Bottom-Right):** `position: 'bottom: 10px; right: 10px;'`  
 
 ---
 
@@ -117,28 +117,37 @@ You can customize the following global variables in the source code:
 While powerful on its own, this script provides a more seamless experience when paired with the following tool.  
 
 ### **🔄️ [Bluesky Tokimeki Switcher](https://github.com/neon-aiart/bsky-tokimeki-switcher/)**<!-- https://greasyfork.org/ja/scripts/545465 -->  
+
 **BSKY ⇔ Tokimeki 切り替え**: URLをボタンやショートカットで瞬時に切り替えるUserScript  
 A UserScript to instantly **switch between Bluesky and Tokimeki URLs** via buttons or shortcuts.  
 
 ### **🌈 [Tokimeki MediaView Fix Plus](https://github.com/neon-aiart/tokimeki-media-view-fix/)**<!-- https://greasyfork.org/ja/scripts/550775 -->  
+
 **Tokimekiの操作性を劇的に改善**: メディアビューのクリック修復に加え、通知欄のメディアプレビューや高度なキーボード操作を追加します  
 **Fixes Tokimeki's MediaView,** adds media previews to the notification column, and enables full keyboard-driven interactions.  
 
 ### **📋 [Tokimeki DID Copy Plus](https://github.com/neon-aiart/tokimeki-did-copy-plus/)**<!-- https://greasyfork.org/ja/scripts/557385 -->  
+
 **不変のプロフィールリンクを瞬時に取得**: ハンドルの変更に左右されない「DIDベースのURL」をコピーし、アクセシビリティも向上させます  
 A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (DID-based URLs)"** and enhance accessibility.  
 
 ---
 
-## 📝 更新履歴  
+## 📝 更新履歴 (Changelog)  
 
-### v3.1 (Current Release)  
+### v3.2 (Current Release)  
+
+☑️ Tokimekiが標準でALTボタンがついたため位置変更  
+
+### v3.1  
+
 ☑️ 最低文字数 (1～99) を追加  
 ☑️ depth を 0 から 1 に変更  
 ☑️ マウスオーバーでボタンの影が消えるバグを修正  
 ☑️ 引用元ALT付GIFのポストにボタンがつかなかったバグを修正  
 
 ### v3.0  
+
 ✅ 正式公開  
 
 ---
@@ -148,7 +157,7 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 このユーザースクリプトのソースコードは、ねおんが著作権を保有しています  
 The source code for this application is copyrighted by Neon.  
 
-* **ライセンス / License**: **[PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/  noncommercial/1.0.0/)** です（LICENSEファイルをご参照ください）  
+* **ライセンス / License**: **[PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)** です（LICENSEファイルをご参照ください）  
   Licensed under PolyForm Noncommercial 1.0.0. (Please refer to the LICENSE file for details.)  
 * **個人利用・非営利目的限定 / For Personal and Non-commercial Use Only**:  
   * 営利目的での利用、無断転載、クレジットの削除は固く禁じます  
@@ -174,6 +183,7 @@ Any distribution in `.zip`, `.exe`, `.cmd` formats on other sites is **FAKE**.
 These have been confirmed to contain **VIRUSES or MALWARE**.  
 
 ### ⚖️ 法的措置と通報について / Legal Action & Abuse Reports  
+
 当プロジェクトの制作物に対する無断転載が確認されたため、過去に **DMCA Take-down通知** を送付しています。  
 また、マルウェアを配布する悪質なサイトについては、順次 **各機関へ通報 (Malware / Abuse Report)** を行っています。  
 We have filed **DMCA Take-down notices** against unauthorized re-uploads of my projects.  

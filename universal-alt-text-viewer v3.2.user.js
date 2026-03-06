@@ -5,7 +5,7 @@
 // @description:ja Twitter, Bluesky, Tokimekiの画像、GIF、動画のALTテキスト（代替テキスト）を表示・コピーします。
 // @namespace      https://bsky.app/profile/neon-ai.art
 // @homepage       https://neon-aiart.github.io/
-// @version        3.1
+// @version        3.2
 // @author         ねおん
 // @match          https://twitter.com/*
 // @match          https://x.com/*
@@ -36,7 +36,7 @@
 (function() {
     'use strict';
 
-    const SCRIPT_VERSION = '3.1';
+    const SCRIPT_VERSION = '3.2';
 
     const MINIMUM_CHARACTER_LENGTH = 12; // 最低文字数
 
@@ -77,16 +77,14 @@
                     textSelector: '', // コンテナ自身を対象にするので空文字にする
                     attr: 'aria-label',
                     position: 'top: 10px; left: 12px;',
-                },
-                {
+                }, {
                     containerSelector: 'div[data-testid="tweetPhoto"]:has(video[aria-label])',
                     textSelector: 'video[aria-label]',
                     attr: 'aria-label',
                     position: 'top: 10px; left: 12px;',
                 },
             ],
-        },
-        {
+        }, {
             name: 'Bluesky',
             hostnames: ['bsky.app',],
             root: 'div[data-testid*="-by-"], div[role="link"]:has(div[data-testid="userAvatarImage"])',
@@ -97,15 +95,13 @@
                     textSelector: 'img[alt]',
                     attr: 'alt',
                     position: 'bottom: 10px; left: 10px;',
-                },
-                {
+                }, {
                     // GIFステッカー
                     containerSelector: 'div:has(> video[aria-label])',
                     textSelector: 'video[aria-label]',
                     attr: 'aria-label',
                     position: 'bottom: 10px; left: 10px;',
-                },
-                {
+                }, {
                     // GIF・動画
                     containerSelector: 'div[aria-label]:has(video):has(figcaption)',
                     textSelector: 'figcaption',
@@ -113,8 +109,7 @@
                     position: 'bottom: 60px; left: 10px;',
                 },
             ],
-        },
-        {
+        }, {
             name: 'Tokimeki',
             hostnames: ['tokimeki.blue',],
             // root: 各表示エリアの外枠
@@ -126,22 +121,19 @@
                     textSelector: 'img[alt]',
                     attr: 'alt',
                     position: 'bottom: 10px; left: 10px;',
-                },
-                {
+                }, {
                     // メディア詳細モーダル
                     containerSelector: 'div.media-content__image:has(img[alt])',
                     textSelector: 'img[alt]',
                     attr: 'alt',
                     position: 'bottom: 10px; left: 10px;',
-                },
-                {
+                }, {
                     // GIFステッカー
                     containerSelector: 'div.timeline-external--tenor:has(video.gif-video)',
                     textSelector: 'p.timeline-external__description',
                     attr: 'innerText',
                     position: 'top: 10px; left: 10px;',
-                },
-                {
+                }, {
                     // GIF・動画
                     containerSelector: 'div.timeline-video-wrap:has(video), div.timeline-video-wrap:has(.video-player)',
                     textSelector: '',
