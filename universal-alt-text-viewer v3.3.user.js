@@ -5,7 +5,7 @@
 // @description:ja Twitter, Bluesky, Tokimekiの画像、GIF、動画のALTテキスト（代替テキスト）を表示・コピーします。
 // @namespace      https://bsky.app/profile/neon-ai.art
 // @homepage       https://neon-aiart.github.io/
-// @version        3.2
+// @version        3.3
 // @author         ねおん
 // @match          https://twitter.com/*
 // @match          https://x.com/*
@@ -36,9 +36,9 @@
 (function() {
     'use strict';
 
-    const SCRIPT_VERSION = '3.2';
+    const SCRIPT_VERSION = '3.3';
 
-    const MINIMUM_CHARACTER_LENGTH = 12; // 最低文字数
+    const MINIMUM_CHARACTER_LENGTH = 5; // 最低文字数
 
     // 除外ALTテキスト
     const localizedImageStrings = [
@@ -100,13 +100,13 @@
                     containerSelector: 'div:has(> video[aria-label])',
                     textSelector: 'video[aria-label]',
                     attr: 'aria-label',
-                    position: 'bottom: 10px; left: 10px;',
+                    position: 'bottom: 30px; right: 10px;',
                 }, {
                     // GIF・動画
                     containerSelector: 'div[aria-label]:has(video):has(figcaption)',
                     textSelector: 'figcaption',
                     attr: 'innerText',
-                    position: 'bottom: 60px; left: 10px;',
+                    position: 'bottom: 60px; right: 10px;',
                 },
             ],
         }, {
@@ -120,19 +120,19 @@
                     containerSelector: 'div.timeline-image:not(.avatar div):has(img[alt])',
                     textSelector: 'img[alt]',
                     attr: 'alt',
-                    position: 'top: 10px; left: 10px;',
+                    position: 'bottom: 40px; left: 10px;',
                 }, {
                     // メディア詳細モーダル
                     containerSelector: 'div.media-content__image:has(img[alt])',
                     textSelector: 'img[alt]',
                     attr: 'alt',
-                    position: 'top: 10px; left: 10px;',
+                    position: 'bottom: 40px; left: 10px;',
                 }, {
                     // GIFステッカー
                     containerSelector: 'div.timeline-external--tenor:has(video.gif-video)',
                     textSelector: 'p.timeline-external__description',
                     attr: 'innerText',
-                    position: 'top: 10px; left: 10px;',
+                    position: 'bottom: 10px; right: 10px;',
                 }, {
                     // GIF・動画
                     containerSelector: 'div.timeline-video-wrap:has(video), div.timeline-video-wrap:has(.video-player)',
@@ -396,7 +396,7 @@
 
             const data = await res.json();
             const post = data.thread?.post;
-            console.log('[Debug] post.embed full structure:', JSON.stringify(post.embed, null, 2));
+            // console.log('[Debug] post.embed full structure:', JSON.stringify(post.embed, null, 2));
 
             // 動画のALTを優先的に、なければ埋め込みのALTを取得
             let altText = post.embed?.external?.title ||

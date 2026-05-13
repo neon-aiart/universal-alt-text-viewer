@@ -1,4 +1,4 @@
-# 📝 Universal ALT Text Viewer v3.2  
+# 📝 Universal ALT Text Viewer v3.3  
 
 <img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/00498-3039747079.png" style="height: 200px; width: 200px; object-fit: contain;" align="right" alt="thumbnail">  
 
@@ -138,7 +138,12 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 
 ## 📝 更新履歴 (Changelog)  
 
-### v3.2 (Current Release)  
+### v3.3 (Current Release)  
+
+☑️ 最小文字数の初期値を５に変更  
+☑️ BlueskyとTOKIMEKIのボタンの位置を微調整  
+
+### v3.2  
 
 ☑️ Tokimekiが標準でALTボタンがついたため位置変更  
 
