@@ -138,6 +138,10 @@ A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (D
 
 ## 📝 更新履歴 (Changelog)  
 
+### v3.4 and later (Upcoming Tasks / Backlog)  
+
+* [] Picolaの切り替えでボタンが消えない  
+
 ### v3.3 (Current Release)  
 
 ☑️ 最小文字数の初期値を５に変更  
