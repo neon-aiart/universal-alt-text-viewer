@@ -341,7 +341,7 @@
         const applyClamp = (prop) => {
             const match = position.match(new RegExp(`${prop}:\\s*([^;]+)`, 'i'));
             // 5pxから、(100% - ボタン幅35px)の間に収める
-            if (match) btn.style[prop] = `clamp(5px, ${match[1]}, calc(100% - 35px))`;
+            if (match) btn.style[prop] = `clamp(5px, ${match[1].trim()}, calc(100% - 35px))`;
         };
         ['top', 'bottom', 'left', 'right',].forEach(applyClamp);
 
@@ -454,6 +454,7 @@
             });
         }, { capture: true, }); // キャプチャリングフェーズで先に捕まえる
 
+        btn._tooltipEl = tip;
         container.appendChild(btn);
         console.log(`[ALT Viewer] Button added: ${text.replace(/\n/g, ' ').substring(0, 80)}...`);
 
@@ -532,11 +533,14 @@
                         txt = getAltText(el, cfg.attr);
                     }
 
+                    const existingBtn = con.querySelector('.alt-button');
+
                     // --- 2. バリデーションチェック（無効な場合はログを出さずにスキップ） ---
-                    const valid = isValidAltText(txt);
-                    if (!valid || (con.offsetWidth > 0 && con.offsetWidth < 40)) {
-                        const existingBtn = con.querySelector('.alt-button');
-                        if (existingBtn) existingBtn.remove();
+                    if (!isValidAltText(txt) || (con.offsetWidth > 0 && con.offsetWidth < 40)) {
+                        if (existingBtn) {
+                            if (existingBtn._tooltipEl) existingBtn._tooltipEl.remove();
+                            existingBtn.remove();
+                        }
                         continue;
                     }
 
@@ -556,10 +560,12 @@
                     }
 
                     // --- 3. ボタン作成・更新制御 ---
-                    const existingBtn = con.querySelector('.alt-button');
                     if (existingBtn && existingBtn.dataset.altText === txt) continue;
 
-                    if (existingBtn) existingBtn.remove();
+                    if (existingBtn) {
+                        if (existingBtn._tooltipEl) existingBtn._tooltipEl.remove();
+                        existingBtn.remove();
+                    }
 
                     const btn = createAltButton(con, txt, cfg.position);
                     if (btn) btn.dataset.altText = txt;
