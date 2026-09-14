@@ -127,7 +127,7 @@ While powerful on its own, this script provides a more seamless experience when 
 
 A UserScript to instantly **switch between Bluesky and Tokimeki URLs** via buttons or shortcuts.  
 
-### **✨ [TOKIMEKI Sparkle Enhancer](https://github.com/neon-aiart/tokimeki-media-view-fix)**  
+### **✨ [TOKIMEKI Sparkle Enhancer](https://github.com/neon-aiart/tokimeki-sparkle-enhancer)**  
 <!-- https://greasyfork.org/ja/scripts/550775 -->
 
 TOKIMEKIの「メディアビュー（画像表示）」や「予約投稿一覧」をより快適に、もっとキラキラに拡張するためのUserScript  
@@ -141,8 +141,8 @@ TOKIMEKI Sparkle Enhancer is a Tampermonkey userscript designed to expand and el
 
 A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (DID-based URLs)"** and enhance accessibility.  
 
-### **🧼 [X & YouTube Clean Copy Link](https://github.com/neon-aiart/tokimeki-did-copy-plus)**  
-<!-- https://greasyfork.org/ja/scripts/557385 -->
+### **🧼 [X & YouTube Clean Copy Link](https://github.com/neon-aiart/x-clean-copy-link)**  
+<!-- https://greasyfork.org/ja/scripts/588627 -->
 
 X（Twitter）やYouTubeで「リンクをコピー」した際につく余計なトラッキングパラメータ（?s=20, ?t=..., ?si=... 等）を自動でカットするUserScriptです  
 
