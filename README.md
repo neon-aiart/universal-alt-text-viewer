@@ -142,7 +142,7 @@ TOKIMEKI Sparkle Enhancer is a Tampermonkey userscript designed to expand and el
 A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (DID-based URLs)"** and enhance accessibility.  
 
 ### **🧼 [X & YouTube Clean Copy Link](https://github.com/neon-aiart/x-clean-copy-link)**  
-<!-- https://greasyfork.org/ja/scripts/557385 -->
+<!-- https://greasyfork.org/ja/scripts/588627 -->
 
 X（Twitter）やYouTubeで「リンクをコピー」した際につく余計なトラッキングパラメータ（?s=20, ?t=..., ?si=... 等）を自動でカットするUserScriptです  
 
