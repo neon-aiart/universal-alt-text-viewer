@@ -127,7 +127,7 @@ While powerful on its own, this script provides a more seamless experience when 
 
 A UserScript to instantly **switch between Bluesky and Tokimeki URLs** via buttons or shortcuts.  
 
-### **✨ [TOKIMEKI Sparkle Enhancer](https://github.com/neon-aiart/tokimeki-media-view-fix)**  
+### **✨ [TOKIMEKI Sparkle Enhancer](https://github.com/neon-aiart/tokimeki-sparkle-enhancer)**  
 <!-- https://greasyfork.org/ja/scripts/550775 -->
 
 TOKIMEKIの「メディアビュー（画像表示）」や「予約投稿一覧」をより快適に、もっとキラキラに拡張するためのUserScript  
