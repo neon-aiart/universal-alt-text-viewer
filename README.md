@@ -1,6 +1,9 @@
-# 📝 Universal ALT Text Viewer v3.3  
+# 📝 Universal ALT Text Viewer
 
-<img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/00498-3039747079.png" style="height: 200px; width: 200px; object-fit: contain;" align="right" alt="thumbnail">  
+<img src="./assets/00498-3039747079.png" style="height: 200px; width: 200px; object-fit: contain;" align="right" alt="thumbnail">  
+
+[![Version](https://img.shields.io/badge/version-3.4-orange.svg)](https://github.com/neon-aiart/universal-alt-text-viewer)
+[![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue.svg)](https://polyformproject.org/licenses/noncommercial/1.0.0/)
 
 **SNSの「隠れた言葉」を可視化する、アクセシビリティ・ツール**  
 **An accessibility tool to visualize "hidden words" (ALT) on SNS.**  
@@ -41,7 +44,7 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
 
 ## ✨ 世界唯一＆最強の特徴 / World-First & Unique Features  
 
-<img src="https://raw.githubusercontent.com/neon-aiart/universal-alt-text-viewer/main/screenshot.png" style="width: 200px; object-fit: contain;" align="right" alt="screenshot" />  
+<img src="./assets/screenshot.png" style="width: 200px; object-fit: contain;" align="right" alt="screenshot" />  
 
 * **【世界唯一】Bluesky動画のALT対応 / World-First: Bsky Video ALT Support:**  
   Blueskyの公式アプリやブラウザ版では、動画に設定されたALTを確認する術がありません  
@@ -114,35 +117,56 @@ You can customize the following global variables in the source code:
 ## 💡 Tips: 快適なエコシステムの構築 / Build Your Ecosystem  
 
 このスクリプトは、単体でも強力ですが、以下のスクリプトと組み合わせることで、Blueskyのブラウジング体験をさらにシームレスなものにします  
+
 While powerful on its own, this script provides a more seamless experience when paired with the following tool.  
 
-### **🔄️ [Bluesky Tokimeki Switcher](https://github.com/neon-aiart/bsky-tokimeki-switcher/)**  
+### **🔄️ [Bluesky Tokimeki Switcher](https://github.com/neon-aiart/bsky-tokimeki-switcher)**  
 <!-- https://greasyfork.org/ja/scripts/545465 -->
 
 **BSKY ⇔ Tokimeki 切り替え**: URLをボタンやショートカットで瞬時に切り替えるUserScript  
+
 A UserScript to instantly **switch between Bluesky and Tokimeki URLs** via buttons or shortcuts.  
 
-### **🌈 [Tokimeki MediaView Fix Plus](https://github.com/neon-aiart/tokimeki-media-view-fix/)**  
+### **✨ [TOKIMEKI Sparkle Enhancer](https://github.com/neon-aiart/tokimeki-media-view-fix)**  
 <!-- https://greasyfork.org/ja/scripts/550775 -->
 
-**Tokimekiの操作性を劇的に改善**: メディアビューのクリック修復に加え、通知欄のメディアプレビューや高度なキーボード操作を追加します  
-**Fixes Tokimeki's MediaView,** adds media previews to the notification column, and enables full keyboard-driven interactions.  
+TOKIMEKIの「メディアビュー（画像表示）」や「予約投稿一覧」をより快適に、もっとキラキラに拡張するためのUserScript  
 
-### **📋 [Tokimeki DID Copy Plus](https://github.com/neon-aiart/tokimeki-did-copy-plus/)**  
+TOKIMEKI Sparkle Enhancer is a Tampermonkey userscript designed to expand and elevate your TOKIMEKI experience, focused on bringing extra sparkle and comfort to your "Media View (Image Viewer)" and "Scheduled Posts."  
+
+### **📋 [Tokimeki DID Copy Plus](https://github.com/neon-aiart/tokimeki-did-copy-plus)**  
 <!-- https://greasyfork.org/ja/scripts/557385 -->
 
 **不変のプロフィールリンクを瞬時に取得**: ハンドルの変更に左右されない「DIDベースのURL」をコピーし、アクセシビリティも向上させます  
+
 A specialized UserScript for "Tokimeki" to **instantly copy "Invariable Links (DID-based URLs)"** and enhance accessibility.  
+
+### **🧼 [X & YouTube Clean Copy Link](https://github.com/neon-aiart/tokimeki-did-copy-plus)**  
+<!-- https://greasyfork.org/ja/scripts/557385 -->
+
+X（Twitter）やYouTubeで「リンクをコピー」した際につく余計なトラッキングパラメータ（?s=20, ?t=..., ?si=... 等）を自動でカットするUserScriptです  
+
+A UserScript that automatically removes unnecessary tracking parameters (e.g., ?s=20, ?t=..., ?si=...) when you copy links on X (Twitter) and YouTube.  
 
 ---
 
 ## 📝 更新履歴 (Changelog)  
 
-### v3.4 and later (Upcoming Tasks / Backlog)  
+### v3.5 and later (Upcoming Tasks / Backlog)  
 
-* [] Picolaの切り替えでボタンが消えない  
+No Tasks...  
 
-### v3.3 (Current Release)  
+### v3.4 (Current Release)  
+
+✅ Twitterのモーダルに対応  
+☑️ TOKIMEKIのメディアビューの複数画像でツールチップが切り替えボタンの裏になってたのを修正  
+✅ TOKIMEKIのタイムラインでカルーセルに対応  
+✅ TOKIMEKIのwarnありに対応  
+☑️ アイコンフォントをimportからSVGで内蔵に変更（外部通信をなくし、表示速度と安定性を向上）  
+☑️ 位置計算・スタイリングの最適化: ツールチップの座標計算に getBoundingClientRect を導入  
+☑️ 処理ロジックの再構築（processPost）: DOM操作およびデバッグログを最適化  
+
+### v3.3
 
 ☑️ 最小文字数の初期値を５に変更  
 ☑️ BlueskyとTOKIMEKIのボタンの位置を微調整  
@@ -222,9 +246,16 @@ SNSのタイムラインに埋もれた「製作者の意図（ALT）」を救�
 
 ---
 
-## 開発者 (Author)  
+## 開発者 / Credits  
 
-**ねおん (Neon)**  
+* **Executive Producer & Lead Architect**: ねおん (Neon)  
+* **Assistant & Core Developer**: Gemini  
+* **Special Thanks**:  
+  * **Ecosystem Platform**: Bluesky PBLLC / X Corp., Google LLC  
+  * **Original App Developer**: [TOKIMEKI](https://github.com/spuithori/tokimekibluesky) by ほりべあ (Holybea)  
+  * **Icon Libraries & Resources**:  
+    * **Handcrafted SVG Icons by Tailwind Labs**: [Heroicons](https://heroicons.com/)  
+
 <pre>
 <img src="https://www.google.com/s2/favicons?domain=bsky.app&size=16" alt="Bluesky icon"> Bluesky       :<a href="https://bsky.app/profile/neon-ai.art/">https://bsky.app/profile/neon-ai.art/</a>
 <img src="https://www.google.com/s2/favicons?domain=github.com&size=16" alt="GitHub icon"> GitHub        :<a href="https://github.com/neon-aiart/">https://github.com/neon-aiart/</a>
@@ -232,9 +263,9 @@ SNSのタイムラインに埋もれた「製作者の意図（ALT）」を救�
 <img src="https://www.google.com/s2/favicons?domain=greasyfork.org&size=16" alt="Greasy Fork icon"> Greasy Fork   :<a href="https://greasyfork.org/ja/users/1494762/">https://greasyfork.org/ja/users/1494762/</a>
 <img src="https://www.google.com/s2/favicons?domain=zenn.dev&size=16" alt="Sizu icon"> Zenn Dev      :<a href="https://zenn.dev/neon_aiart/">https://zenn.dev/neon_aiart/</a>
 <img src="https://www.google.com/s2/favicons?domain=sizu.me&size=16" alt="Sizu icon"> Sizu Diary    :<a href="https://sizu.me/neon_aiart/">https://sizu.me/neon_aiart/</a>
-<img src="https://www.google.com/s2/favicons?domain=ofuse.me&size=16" alt="Ofuse icon"> Ofuse         :<a href="https://ofuse.me/neon/">https://ofuse.me/neon/</a>
+<img src="https://www.google.com/s2/favicons?domain=ofuse.me&size=16" alt="Ofuse icon"> OFUSE         :<a href="https://ofuse.me/neon/">https://ofuse.me/neon/</a>
 <img src="https://www.google.com/s2/favicons?domain=www.chichi-pui.com&size=16" alt="chichi-pui icon"> chichi-pui    :<a href="https://www.chichi-pui.com/users/neon/">https://www.chichi-pui.com/users/neon/</a>
-<img src="https://www.google.com/s2/favicons?domain=iromirai.jp&size=16" alt="iromirai icon"> iromirai      :<a href="https://iromirai.jp/creators/neon/">https://iromirai.jp/creators/neon/</a>
+<img src="https://www.google.com/s2/favicons?domain=iromirai.jp&size=16" alt="iromirai icon"> IROMIRAI      :<a href="https://iromirai.jp/creators/neon/">https://iromirai.jp/creators/neon/</a>
 <img src="https://www.google.com/s2/favicons?domain=www.days-ai.com&size=16" alt="DaysAI icon"> DaysAI        :<a href="https://www.days-ai.com/users/lxeJbaVeYBCUx11QXOee/">https://www.days-ai.com/users/lxeJbaVeYBCUx11QXOee/</a>
 </pre>
 
