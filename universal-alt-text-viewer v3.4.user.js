@@ -532,10 +532,10 @@
                         txt = getAltText(el, cfg.attr);
                     }
 
+                    const existingBtn = con.querySelector('.alt-button');
+
                     // --- 2. バリデーションチェック（無効な場合はログを出さずにスキップ） ---
-                    const valid = isValidAltText(txt);
-                    if (!valid || (con.offsetWidth > 0 && con.offsetWidth < 40)) {
-                        const existingBtn = con.querySelector('.alt-button');
+                    if (!isValidAltText(txt) || (con.offsetWidth > 0 && con.offsetWidth < 40)) {
                         if (existingBtn) existingBtn.remove();
                         continue;
                     }
@@ -556,7 +556,6 @@
                     }
 
                     // --- 3. ボタン作成・更新制御 ---
-                    const existingBtn = con.querySelector('.alt-button');
                     if (existingBtn && existingBtn.dataset.altText === txt) continue;
 
                     if (existingBtn) existingBtn.remove();
