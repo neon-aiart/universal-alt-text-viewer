@@ -21,9 +21,13 @@ In today's social media, accessibility (ALT: alternative text) is a vital bridge
 
 This UserScript instantly displays ALT text for images, GIFs, and videos on Twitter, Bluesky, and TOKIMEKI with just a hover, and allows for one-click copying.  
 
-➡️ [**いますぐインストール！**](#-インストール方法--installation-guide) (Skip to Installation)  
+➡️ いますぐ **[インストール](#-インストール方法--installation-guide)** ！ (Skip to Installation)  
 
-⭐ スターをポチッとお願いします✨ (Please hit the [Star] button!)<br clear="right">
+⭐ **[スター](https://github.com/neon-aiart/universal-alt-text-viewer)** をポチッとお願いします (Please hit the [Star] button!)✨  
+
+[![Hatena Bookmark](https://img.shields.io/badge/Bookmark-Hatena-blue?style=flat)](https://b.hatena.ne.jp/entry/panel/?url=https://github.com/neon-aiart/universal-alt-text-viewer) ポチッとブックマーク (Please click the [Bookmark] button!)📖  
+
+<br clear="all">
 
 ---
 
