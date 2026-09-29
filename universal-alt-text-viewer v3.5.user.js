@@ -5,7 +5,7 @@
 // @description:ja Twitter, Bluesky, TOKIMEKIの画像、GIF、動画のALTテキスト（代替テキスト）を表示・コピーします。
 // @namespace      https://bsky.app/profile/neon-ai.art
 // @homepage       https://github.com/neon-aiart
-// @version        3.4
+// @version        3.5
 // @author         ねおん
 // @match          https://twitter.com/*
 // @match          https://x.com/*
@@ -42,17 +42,17 @@
 (function() {
     'use strict';
 
-    const SCRIPT_VERSION = '3.4';
-
-    const MINIMUM_CHARACTER_LENGTH = 5; // 最低文字数
+    const SCRIPT_VERSION = '3.5';
 
     const DEBUG = false;
     let lastLoggedPost = null; // 直近にログを出力した post 要素を保持
     const DEBUG_STRUCTURE = false;
     if (DEBUG) console.log(`[${getDateTimeFormats().display}] 📝 Universal ALT Text Viewer v${SCRIPT_VERSION}: デバッグモード`);
 
+    const MINIMUM_CHARACTER_LENGTH = 5; // 最低文字数
+
     // 除外ALTテキスト
-    const localizedImageStrings = [
+    const LOCALIZED_IMAGE_STRINGS = [
         "画像", "Image", "圖片", "이미지", "Imagen", "Bild",
         "Immagine", "Imagem", "Foto", "Rasm", "Kép", "zdjęcie",
         "埋め込み動画", "埋め込みビデオプレーヤー",
@@ -77,7 +77,7 @@
      *                        'innerText' を指定すると属性ではなくタグの中身を取得する。
      *   - position:          ボタンの表示位置
      */
-    const platformConfigs = [ {
+    const PLATFORM_CONFIGS = [ {
         name: 'Twitter/X',
         hostnames: ['twitter.com', 'x.com',],
         root: 'article[data-testid="tweet"], div[aria-labelledby="modal-header"]',
@@ -123,7 +123,7 @@
         name: 'TOKIMEKI',
         hostnames: ['tokimeki.blue', 'tokimekibluesky.vercel.app', 'localhost',],
         // root: 各表示エリアの外枠
-        root: 'article.timeline__item, article.notifications-item, dialog.media-content-wrap',
+        root: 'article.timeline__item, article.notifications-item, dialog.media-content-wrap, dialog.video-modal',
         targets: [ {
             containerSelector: [
                 // タイムライン: warnなし
@@ -152,14 +152,20 @@
             position: 'bottom: 10px; right: 10px;',
         }, {
             // GIF・動画
-            containerSelector: 'div.timeline-video-wrap:has(video), div.timeline-video-wrap:has(.video-player)',
+            containerSelector: 'div.timeline-video-wrap div.video-player:has(> video)',
             textSelector: '',
             attr: 'alt',
             position: 'bottom: 60px; right: 10px;',
         }, ],
     }, ];
 
-    const currentPlatform = platformConfigs.find(p => p.hostnames.some(h => window.location.hostname.includes(h)));
+    // 監視対象とするHTML属性のリスト
+    const OBSERVED_ATTRIBUTES = [
+        'src', 'alt', 'style', 'class', 'role',
+        'aria-label', 'aria-labelledby', 'data-alt', 'data-testid', 'data-expoimage',
+    ];
+
+    const currentPlatform = PLATFORM_CONFIGS.find(p => p.hostnames.some(h => window.location.hostname.includes(h)));
     if (!currentPlatform) return; // 対象外のURL
 
     // --- スタイル ---
@@ -259,7 +265,7 @@
         if (!text) return false;
         const length = Math.min(Math.max(MINIMUM_CHARACTER_LENGTH, 1), 99);
         const trimmed = text.trim();
-        return trimmed.length > length && !localizedImageStrings.includes(trimmed);
+        return trimmed.length > length && !LOCALIZED_IMAGE_STRINGS.includes(trimmed);
     }
 
     /**
@@ -280,46 +286,156 @@
         return text.trim();
     }
 
-    // --- API Core (TOKIMEKI 動画用) ---
-    async function fetchVideoAltForTokimeki(videoWrap) {
-        const contentNode = videoWrap.closest('.timeline__content');
-        const uri = contentNode?.dataset.aturi;
-        if (!uri) return '';
+    // --- TOKIMEKI 動画 Alt キャッシュ用 Map ---
+    const tokimekiAltCache = new Map(); // Key: videoCid (or playlist/thumbnail CID), Value: altText
+
+    // --- fetch のフック処理 (unsafeWindow を使用) ---
+    const targetWindow = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
+    const originalFetch = targetWindow.fetch;
+
+    targetWindow.fetch = async function (...args) {
+        const response = await originalFetch.apply(this, args);
 
         try {
-            const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(uri)}&depth=1`;
-            const res = await fetch(apiUrl);
-            if (!res.ok) return '';
-
-            const data = await res.json();
-            const post = data.thread?.post;
-            if (DEBUG_STRUCTURE) console.log('[DEBUG] post.embed full structure:', JSON.stringify(post.embed, null, 2));
-
-            // 動画のALTを優先的に、なければ埋め込みのALTを取得
-            let altText =
-                post.embed?.external?.title ||
-                post.embed?.media?.external?.title ||
-                post.embed?.media?.alt ||
-                post.embed?.video?.alt ||
-                post.embed?.alt || '';
-
-            if (!altText && post.embed?.record) {
-                const q = post.embed.record.embeds?.[0];
-                if (q) {
-                    altText =
-                        q.external?.title ||
-                        q.media?.external?.title ||
-                        q.media?.alt ||
-                        q.video?.alt ||
-                        q.alt || '';
-                }
+            // URLの取得
+            let url = '';
+            if (typeof args[0] === 'string') {
+                url = args[0];
+            } else if (args[0] instanceof Request) {
+                url = args[0].url;
+            } else if (args[0] && typeof args[0] === 'object' && args[0].url) {
+                url = args[0].url;
             }
 
-            return altText;
+            // Bluesky のタイムラインや投稿詳細の XRPC リクエストのみを対象にする
+            const isTargetApi = url.includes('/xrpc/app.bsky.feed.getTimeline') ||
+                                url.includes('/xrpc/app.bsky.feed.getAuthorFeed') ||
+                                url.includes('/xrpc/app.bsky.feed.getPostThread') ||
+                                url.includes('/xrpc/app.bsky.feed.getPosts');
+
+            if (isTargetApi) {
+                // if (DEBUG) console.log('[DEBUG Fetch] XRPC Target Hit:', url);
+
+                const clone = response.clone();
+                clone.json().then(data => {
+                    parseAndCacheVideoAlt(data);
+                }).catch(() => {});
+            }
         } catch (e) {
-            console.error('[ALT-Script] TOKIMEKI API Fetch Error:', e);
-            return '';
+            console.error('[DEBUG] Error in fetch hook:', e);
         }
+
+        return response;
+    };
+
+    // レスポンス JSON から動画の CID と alt を抽出して Map にセットする関数
+    function parseAndCacheVideoAlt(obj) {
+        if (!obj || typeof obj !== 'object') return;
+
+        // --- パターン 1: record.embed や record.embed.media (投稿データ構造) ---
+        if (obj.$type === 'app.bsky.embed.video' || obj.$type === 'app.bsky.embed.recordWithMedia') {
+            const targetEmbed = obj.media || obj; // recordWithMedia の場合は media 側を参照
+            const alt = targetEmbed.alt || '';
+            const videoCid = targetEmbed.video?.ref?.$link || targetEmbed.cid;
+
+            // CID と Alt が存在し、まだ Map に登録されていない場合のみ追加
+            if (videoCid && alt) {
+                if (!tokimekiAltCache.has(videoCid)) {
+                    tokimekiAltCache.set(videoCid, alt);
+                    if (DEBUG) console.log('[DEBUG Cache] Registered video CID:', videoCid, '-> Alt:', alt);
+                }
+            }
+        }
+
+        // --- パターン 2: embed (#view 形式や thumbnail を持つ出力構造) ---
+        if (obj.thumbnail && typeof obj.thumbnail === 'string') {
+            const alt = obj.alt || '';
+            // thumbnail URL (https://video.bsky.app/watch/.../bafkrei.../thumbnail.jpg) から CID を抽出
+            const match = obj.thumbnail.match(/\/([a-z0-9]{40,})\/thumbnail/i);
+            if (match && match[1] && !tokimekiAltCache.has(match[1])) {
+                const cidFromThumb = match[1];
+                if (alt) {
+                    tokimekiAltCache.set(cidFromThumb, alt);
+                    if (DEBUG) console.log('[DEBUG Cache] Registered via Thumbnail CID:', cidFromThumb, '-> Alt:', alt);
+                }
+            }
+        }
+
+        // --- 子要素の再帰探索 ---
+        if (Array.isArray(obj)) {
+            for (const item of obj) {
+                parseAndCacheVideoAlt(item);
+            }
+        } else {
+            for (const key of Object.keys(obj)) {
+                // DOM要素や特殊オブジェクトを回避しつつプレーンなオブジェクトのみ再帰
+                if (obj[key] && typeof obj[key] === 'object' && !(obj[key] instanceof Node)) {
+                    parseAndCacheVideoAlt(obj[key]);
+                }
+            }
+        }
+    }
+
+    // --- API Core (TOKIMEKI 動画用) ---
+    async function fetchVideoAltForTokimeki(videoWrap) {
+        /*
+        // 1. timeline__content の data-aturi から API を叩く
+        const contentNode = videoWrap.closest('.timeline__content');
+        const uri = contentNode?.dataset.aturi;
+
+        if (uri) {
+            try {
+                const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(uri)}&depth=1`;
+                const res = await fetch(apiUrl);
+                if (res.ok) {
+                    const data = await res.json();
+                    const post = data.thread?.post;
+                    if (DEBUG_STRUCTURE) console.log('[DEBUG] post.embed full structure:', JSON.stringify(post?.embed, null, 2));
+
+                    if (post?.embed) {
+                        // 動画のALTを優先的に、なければ埋め込みのALTを取得
+                        let altText =
+                            post.embed.media?.alt ||
+                            post.embed.external?.title ||
+                            post.embed.media?.external?.title ||
+                            post.embed.video?.alt ||
+                            post.embed.alt || '';
+
+                        // 引用投稿（Quote）がある場合のフォールバック処理
+                        if (!altText && post.embed.record) {
+                            const q = post.embed.record.embeds?.[0];
+                            if (q) {
+                                altText =
+                                    q.media?.alt ||
+                                    q.external?.title ||
+                                    q.media?.external?.title ||
+                                    q.video?.alt ||
+                                    q.alt || '';
+                            }
+                        }
+
+                        if (altText) return altText;
+                    }
+                }
+            } catch (e) {
+                console.error('[ALT-Script] TOKIMEKI API Fetch Error:', e);
+            }
+        }
+        */
+
+        // 2. poster URL から動画のサムネイル CID を取得
+        const videoEl = videoWrap.querySelector('video');
+        const posterUrl = videoEl ? (videoEl.getAttribute('poster') || '') : '';
+        const cidMatch = posterUrl.match(/\/([a-z0-9]{40,})\/thumbnail/i);
+        const videoCid = cidMatch ? cidMatch[1] : '';
+
+        // Map キャッシュから検索
+        if (videoCid && tokimekiAltCache.has(videoCid)) {
+            if (DEBUG) console.log('[DEBUG] Cache Hit! Alt:', tokimekiAltCache.get(videoCid));
+            return tokimekiAltCache.get(videoCid);
+        }
+
+        return '';
     }
 
     // コピーボタンを生成・設置
@@ -509,22 +625,33 @@
 
                     // TOKIMEKIかつ動画コンテナの場合のみ、属性をAPIから補完
                     if (currentPlatform.name === 'TOKIMEKI' && cfg.containerSelector.includes('.timeline-video-wrap')) {
-                        if (!con.querySelector('video, .video-player') || con.dataset.fetching === 'true') continue;
+                        // 取得中('true')、完了('completed')、失敗('failed')など、何かフラグがあればスキップ
+                        if (!con.querySelector('video, .video-player') || con.dataset.fetching) continue;
 
                         // すでにALT属性にセットされているか確認
                         txt = con.getAttribute('alt') || '';
                         el = con; // 動画の場合はコンテナ自身
 
                         if (!isValidAltText(txt)) {
-                            con.dataset.fetching = 'true';
+                            con.dataset.fetching = 'true'; // 処理中フラグ
                             txt = await fetchVideoAltForTokimeki(con);
+
                             if (isValidAltText(txt)) {
-                                if (DEBUG) console.log(`[DEBUG] TOKIMEKI動画ALT取得成功: "${txt.substring(0, 30)}..."`);
+                                // if (DEBUG) console.log(`[DEBUG] TOKIMEKI動画ALT取得成功: "${txt.substring(0, 30)}..."\n`, con?.outerHTML || con);
+                                if (DEBUG) {
+                                    console.groupCollapsed(`[DEBUG] TOKIMEKI動画ALT取得成功: "${txt.substring(0, 30)}..."`);
+                                    console.log('対象要素(HTML):', con.outerHTML);
+                                    console.log('DOMオブジェクト:', con);
+                                    console.groupEnd();
+                                }
                                 con.setAttribute('alt', txt);
-                            } else if (DEBUG) {
-                                console.warn('[DEBUG] TOKIMEKI動画ALTの取得失敗または空データ', con);
+                                con.dataset.fetching = 'completed'; // 成功フラグ
+                            } else {
+                                if (DEBUG) {
+                                    console.warn('[DEBUG] TOKIMEKI動画ALTの取得失敗または空データ', con);
+                                }
+                                con.dataset.fetching = 'failed'; // 失敗フラグを残して再試行をブロック！
                             }
-                            con.dataset.fetching = 'false';
                         }
                     } else {
                         // 通常の画像・要素のテキスト取得
@@ -576,10 +703,13 @@
     // --- 監視 ---
     const observer = new MutationObserver(mutations => {
         for (const m of mutations) {
-            // 1. ノード追加（新しい投稿やスライド要素がDOMに挿入されたとき）
+            // 1. ノード追加（新しい投稿やカラム、スライド要素がDOMに挿入されたとき）
             if (m.type === 'childList') {
                 m.addedNodes.forEach(node => {
                     if (node.nodeType === 1) {
+                        // スクリプト自身が生成したボタン（およびその子要素のツールチップ）の追加は無視する
+                        if (node.classList && node.classList.contains('alt-button')) return;
+
                         if (node.matches && node.matches(currentPlatform.root)) {
                             processPost(node);
                         } else {
@@ -588,10 +718,14 @@
                     }
                 });
             }
-            // 2. 属性変更（画像が遅れて読み込まれたり、alt/srcが後から書き換わったとき）
+            // 2. 属性変更（メディアビューの画像切り替え時のstyle変更や、alt/srcの遅れての更新）
             else if (m.type === 'attributes') {
                 const targetEl = m.target;
                 if (targetEl.nodeType === 1) {
+                    // スクリプト自身が生成したボタン（およびその子要素）の属性・スタイル変更は無視する
+                    if (targetEl.classList && targetEl.classList.contains('alt-button')) return;
+
+                    // 監視対象の投稿要素（root）内にある変更かチェックして実行
                     const post = targetEl.closest(currentPlatform.root);
                     if (post) processPost(post);
                 }
@@ -600,13 +734,14 @@
     });
 
     observer.observe(document.body, {
-        childList: true,       // 要素の追加・削除を検知
-        subtree: true,         // 子孫要素全体を対象にする
-        attributes: true,      // 属性（srcやclassなど）の変更を検知
+        childList: true,                      // 要素の追加・削除を検知
+        subtree: true,                        // 子孫要素全体を対象にする
+        attributes: true,                     // 属性の変更を検知
+        attributeFilter: OBSERVED_ATTRIBUTES, // 変化する属性に絞り込む
     });
 
-    // 初期実行
-    window.addEventListener('load', () => {
-        setTimeout(() => document.querySelectorAll(currentPlatform.root).forEach(processPost), 1000);
-    });
+    // --- 初期実行 ---
+    // ページ読み込み時点で「すでに存在している投稿」があれば処理
+    //（存在しなくても、直前に開始した MutationObserver が後から描画された投稿を拾うためタイマー不要）
+    document.querySelectorAll(currentPlatform.root).forEach(processPost);
 })();
