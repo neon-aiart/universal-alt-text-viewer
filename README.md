@@ -287,7 +287,13 @@ The source code for this application is copyrighted by Neon.
   * 本スクリプトを改変・配布（フォーク）する場合は、必ず元の作者名（ねおん）およびクレジット表記を維持してください  
     If you modify or redistribute (fork) this script, you MUST retain the original author's name (Neon) and all credit notations.  
 
-※ ご利用は自己責任でお願いします（悪用できるようなものではないですが、念のため！）  
+* ご利用は自己責任でお願いします（悪用できるようなものではないですが、念のため！）  
+  Please use this script at your own risk. (It’s not designed for misuse, but just in case!)  
+
+### 外部ライブラリ・商標について / External Assets & Trademarks
+
+* **Heroicons**: [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE) (© Tailwind Labs, Inc.) に基づいて使用しています  
+  Used under the [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE) (© Tailwind Labs, Inc.).  
 
 ---
 
