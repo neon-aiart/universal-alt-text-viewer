@@ -23,11 +23,12 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
 
 ➡️ いますぐ **[インストール](#-インストール方法--installation-guide)** ！ (Skip to Installation)  
 
-⭐ **[スター](https://github.com/neon-aiart/universal-alt-text-viewer)** をポチッとお願いします (Please hit the [Star] button!)✨  
+⭐ **[スター](https://github.com/neon-aiart/universal-alt-text-viewer)** をポチッとお願いします✨ (Please hit the [Star] button!)  
 
-[![Hatena Bookmark](https://img.shields.io/badge/Bookmark-Hatena-blue?style=flat)](https://b.hatena.ne.jp/entry/panel/?url=https://github.com/neon-aiart/universal-alt-text-viewer) ポチッとブックマーク (Please click the [Bookmark] button!)📖  
+<a href="https://b.hatena.ne.jp/entry/panel/?url=https://github.com/neon-aiart/universal-alt-text-viewer"><img src="https://b.hatena.ne.jp/favicon.ico" width="20" height="20" alt="📖"></a> ポチッと[ブックマーク](https://b.hatena.ne.jp/entry/panel/?url=https://github.com/neon-aiart/universal-alt-text-viewer)をお願い致します✨ (Please click the [Bookmark] button!)  
 
-<br clear="all">
+<br clear="all">  
+
 
 ---
 
