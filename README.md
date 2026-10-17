@@ -233,7 +233,10 @@ A UserScript that automatically removes unnecessary tracking parameters (e.g., ?
 
 ### v3.6 and later (Upcoming Tasks / Backlog)  
 
-No Tasks...  
+* [ ] タイムラインの自動更新でmutationが検知していない疑惑  
+  * console.logで自動更新のときの状態を確認する  
+
+Work in Progress...<!-- No Tasks... -->  
 
 ### v3.5 (Current Release)  
 
