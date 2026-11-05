@@ -29,7 +29,6 @@ This UserScript instantly displays ALT text for images, GIFs, and videos on Twit
 
 <br clear="all">  
 
-
 ---
 
 🇯🇵  
